@@ -12,19 +12,22 @@ export default {
   },
   data() {
     return {
-      appApi: [],
+      // appApi: [],
     };
   },
-  methods: {
-    getApi(headerApi) {
-      this.appApi = headerApi;
-    },
-  },
+
+  // methods: {
+  //   getApi(headerApi) {
+  //     this.appApi = headerApi;
+  //   },
+  // },
 };
 </script>
 
 <template>
   <AppHeader></AppHeader>
+  <!-- @headerApi="getApi" -->
+
   <div class="container">
     <div class="row">
       <div class="col">
@@ -34,7 +37,7 @@ export default {
   </div>
 
   <AppMain></AppMain>
-
+  <!-- :apiData="appApi" -->
   <!--<AppCard></AppCard> -->
 </template>
 //
