@@ -1,14 +1,14 @@
 <script>
 import AppHeader from "./components/AppHeader.vue";
 import AppMain from "./components/AppMain.vue";
-// import AppCard from "./components/AppCard.vue";
+import CardsCounter from "./components/CardsCounter.vue";
 
 export default {
   name: "Appvue",
   components: {
     AppHeader,
     AppMain,
-    // AppCard,
+    CardsCounter,
   },
   data() {
     return {
@@ -28,16 +28,9 @@ export default {
   <AppHeader></AppHeader>
   <!-- @headerApi="getApi" -->
 
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <h2>AppVue</h2>
-      </div>
-    </div>
-  </div>
-
   <AppMain></AppMain>
   <!-- :apiData="appApi" -->
+  <CardsCounter></CardsCounter>
   <!--<AppCard></AppCard> -->
 </template>
 //
