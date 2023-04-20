@@ -7,19 +7,20 @@ export default {
     return {
       rispApi: [],
       rispApiTv: [],
-
       baseUri: "https://api.themoviedb.org/3/",
       typeSearch: "search/movie",
       typeSearchTv: "search/tv",
       apiKey: "?api_key=f4a2ba11f237cc06a01698ccbd4cb0f5",
       store,
-    };
-  },
 
-  mounted() {
-    // axios.get("https://api.themoviedb.org/3/search/movie").then((resp) => {
-    //   this.archtypes = resp.data;
-    // });
+      linguaBandiere: {
+        en: "./assets/img/en.png",
+        es: "./assets/img/en.png",
+        fr: "./assets/img/fr.png",
+        it: "./assets/img/it.png",
+        de: "./assets/img/de.png",
+      },
+    };
   },
 
   methods: {
@@ -38,7 +39,7 @@ export default {
       // serie TV
       axios
         .get(
-          `${this.baseUri}${this.typeSearch}${this.apiKey}&query=${this.store.searchText}`
+          `${this.baseUri}${this.typeSearchTv}${this.apiKey}&query=${this.store.searchText}`
         )
         .then((res) => {
           this.rispApiTv = res.data.results;
@@ -48,6 +49,12 @@ export default {
         });
     },
   },
+  //   star(index, voto) {
+  //     const media = Math.ceil(voto / 2);
+  //     if (media > index) {
+  //       return true;
+  //     }
+  //   },
 };
 </script>
 
@@ -95,17 +102,45 @@ export default {
                 Search
               </button>
             </div>
-            <div v-if="rispApi.length > 0">
-              <!-- v-if per verificare che l'array rispApi abbia almeno un
-              elemento,se si stampiamo a shermo. -->
-              <ul>
-                <li v-for="result in rispApi" :key="result.id">
-                  <h4>Titolo: {{ result.title }}</h4>
-                  <h6>Titolo Originale: {{ result.original_title }}</h6>
-                  <p>Lingua: {{ result.original_language }}</p>
-                  <p>Voto: {{ result.vote_average }}</p>
-                </li>
-              </ul>
+            <div class="card">
+              <!-- <img
+                v-if="result.poster_path"
+                class="img w-100"
+                :src="`https://image.tmdb.org/t/p/w300${result.poster_path}`"
+              /> -->
+              <div v-if="rispApi.length > 0">
+                <!-- v-if per verificare che l'array rispApi abbia almeno un
+                  elemento,se si stampiamo a shermo. -->
+                <ul>
+                  <li v-for="result in rispApi" :key="result.id">
+                    <h4>Titolo: {{ result.title }}</h4>
+                    <img
+                      v-if="result.poster_path"
+                      :src="`https://image.tmdb.org/t/p/w342${result.poster_path}`"
+                    />
+                    <h6>Titolo Originale: {{ result.original_title }}</h6>
+                    <p>
+                      Lingua:
+                      <img
+                        :src="linguaBandiere[result.original_language]"
+                        height="20px"
+                      />
+                      {{ result.original_language }}
+                    </p>
+                    <p>Voto: {{ result.vote_average }}</p>
+                    <!-- <div>
+                      <i
+                        v-for="star in getStars(result.vote_average)"
+                        class="fas fa-star"
+                      ></i>
+                      <i
+                        v-for="star in 5 - getStars(result.vote_average)"
+                        class="far fa-star"
+                      ></i>
+                    </div> -->
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -144,6 +179,9 @@ header {
   color: orange;
   .SearchBox {
     border: 1px solid green;
+    .card {
+      background-color: rgb(27, 27, 27);
+    }
   }
   .box {
     display: flex;

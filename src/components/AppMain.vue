@@ -4,14 +4,12 @@ export default {
   props: ["item"],
   components: {},
   data() {
-    return {
-      countryFlags: ["en", "it", "de", "fr", "es"],
-    };
+    return {};
   },
   methods: {
-    getcountryFlags(lang) {
-      return require(`./assets/img/${lang}.png`);
-    },
+    // getcountryFlags(lang) {
+    //   return require(`./assets/img/${lang}.png`);
+    // },
     // stelle(index, voto) {
     //   const media = Math.ceil(voto / 2);
     //   if (media > index) {
@@ -23,25 +21,12 @@ export default {
 </script>
 
 <template>
-  <div>
-    <!-- <img
-      class="countryFlags"
-      v-if="this.countryFlags.includes(result.original_language)"
-      :src="getcountryFlags(result.original_language)"
-    />
-    <span v-else>{{ result.original_language }}</span> -->
-  </div>
+  <div></div>
   <!--countryFlagMap  -->
 </template>
 <!-- CARD -->
-<style lang="scss">
-.countryFlags {
-  width: 50px;
-  height: auto;
-  margin-top: 10px;
-  border: 2px solid red;
-}
-</style>
+
+<style lang="scss"></style>
 
 <!-- Trasformiamo la stringa statica della lingua in una vera e propria bandiera della
     nazione corrispondente, gestendo il caso in cui non abbiamo la bandiera della
