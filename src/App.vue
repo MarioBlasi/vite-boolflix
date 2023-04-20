@@ -16,11 +16,11 @@ export default {
     };
   },
 
-  // methods: {
-  //   getApi(headerApi) {
-  //     this.appApi = headerApi;
-  //   },
-  // },
+  methods: {
+    getApi(headerApi) {
+      this.appApi = headerApi;
+    },
+  },
 };
 </script>
 
