@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "CardsCounter",
+  name: "Movies",
 
   data() {
     return {};

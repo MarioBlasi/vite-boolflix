@@ -1,24 +1,28 @@
 <script>
 import AppHeader from "./components/AppHeader.vue";
 import AppMain from "./components/AppMain.vue";
-import CardsCounter from "./components/CardsCounter.vue";
+import Movies from "./components/Movies.vue";
 
 export default {
   name: "Appvue",
   components: {
     AppHeader,
     AppMain,
-    CardsCounter,
+    Movies,
   },
   data() {
     return {
-      // appApi: [],
+      appApi: [],
+      appApiTv: [],
     };
   },
 
   methods: {
     getApi(headerApi) {
       this.appApi = headerApi;
+    },
+    getApi(headerApiTv) {
+      this.appApiTv = headerApiTv;
     },
   },
 };
@@ -30,7 +34,7 @@ export default {
 
   <AppMain></AppMain>
   <!-- :apiData="appApi" -->
-  <CardsCounter></CardsCounter>
+  <Movies></Movies>
   <!--<AppCard></AppCard> -->
 </template>
 //

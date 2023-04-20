@@ -6,12 +6,13 @@ export default {
   data() {
     return {
       rispApi: [],
+      rispApiTv: [],
+
       baseUri: "https://api.themoviedb.org/3/",
       typeSearch: "search/movie",
+      typeSearchTv: "search/tv",
       apiKey: "?api_key=f4a2ba11f237cc06a01698ccbd4cb0f5",
       store,
-      //   archetipe: "",
-      //   archetypes: null,
     };
   },
 
@@ -20,9 +21,11 @@ export default {
     //   this.archtypes = resp.data;
     // });
   },
+
   methods: {
     performSearch() {
       console.log("performSearch");
+      // film
       axios
         .get(
           `${this.baseUri}${this.typeSearch}${this.apiKey}&query=${this.store.searchText}`
@@ -31,6 +34,16 @@ export default {
           this.rispApi = res.data.results;
           console.log(this.rispApi);
           if (this.rispApi) this.$emit("headerApi", this.rispApi);
+        });
+      // serie TV
+      axios
+        .get(
+          `${this.baseUri}${this.typeSearch}${this.apiKey}&query=${this.store.searchText}`
+        )
+        .then((res) => {
+          this.rispApiTv = res.data.results;
+          console.log(this.rispApiTv);
+          if (this.rispApiTv) this.$emit("headerApiTv", this.rispApiTv);
           //this.userText = "";
         });
     },
@@ -62,9 +75,9 @@ export default {
     </div> -->
 
     <div class="container">
-      <div class="row">
-        <div class="col asas">
-          <div class="SearchBox mt-5">
+      <div class="row-list box mt-5">
+        <div class="col-10">
+          <div class="SearchBox">
             <div class="input-group d-flex justify-content-end mb-3">
               <input
                 type="text"
@@ -96,11 +109,19 @@ export default {
             </div>
           </div>
         </div>
+        <!-- <div class="col flags">
+          <div class="d-flex justify-content-end">
+            <h2>bandiere</h2>
+          </div>
+        </div> -->
       </div>
     </div>
+
+    <!-- <SearchBox></SearchBox> -->
+    <!--  -->
   </header>
 </template>
-<!-- <SearchBox></SearchBox> -->
+
 <!-- <div class="container d-flex justify-content-between align-items-center">
     <h1>Netflix</h1>
       <div class="mb-3">
@@ -118,4 +139,15 @@ export default {
       </div>
     </div> -->
 
-<style lang="scss"></style>
+<style lang="scss">
+header {
+  color: orange;
+  .SearchBox {
+    border: 1px solid green;
+  }
+  .box {
+    display: flex;
+    flex-direction: row;
+  }
+}
+</style>
