@@ -29,6 +29,10 @@ export default {
 </script>
 
 <template>
+  <!-- <div id="app">
+    <AppHeader @headerApi="getApi" @headerApiTv="getApiTv" />
+    <AppMain :results="appApi" :tv-results="appApiTv" />
+  </div> -->
   <AppHeader></AppHeader>
   <!-- @headerApi="getApi" -->
 
