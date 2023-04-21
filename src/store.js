@@ -7,4 +7,6 @@ export const store = reactive({
   data: "",
   archetypes: [],
   selectedArchetype: null,
+  rispApi: [],
+  rispApiTv: [],
 });

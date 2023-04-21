@@ -2,6 +2,6 @@ import { createApp } from "vue";
 import "./assets/scss/app.scss";
 import App from "./App.vue";
 
-// szdf
+// import "fontawesome";
 
 createApp(App).mount("#app");

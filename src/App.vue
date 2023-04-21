@@ -18,12 +18,12 @@ export default {
   },
 
   methods: {
-    getApi(headerApi) {
-      this.appApi = headerApi;
-    },
-    getApi(headerApiTv) {
-      this.appApiTv = headerApiTv;
-    },
+    // getApi(headerApi) {
+    //   this.appApi = headerApi;
+    // },
+    // getApi(headerApiTv) {
+    //   this.appApiTv = headerApiTv;
+    // },
   },
 };
 </script>
@@ -38,7 +38,7 @@ export default {
 
   <AppMain></AppMain>
   <!-- :apiData="appApi" -->
-  <Movies></Movies>
+
   <!--<AppCard></AppCard> -->
 </template>
 //
