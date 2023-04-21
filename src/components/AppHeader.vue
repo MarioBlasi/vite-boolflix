@@ -64,30 +64,31 @@ export default {
 </script>
 
 <template>
-  <div>
+  <div class="sectionCard">
     <div class="flex-container" id="logo-search">
-      <div class="row list">
+      <div class="row list box-card">
         <!-- HEADER -->
-        <div class="col top p-1">
+        <div class="col top ">
           <div class="logoBox d-flex justify-content-between">
             <img
               class="logo p-2 ms-3"
               src="https://image.tmdb.org/t/p/w500/wwemzKWzjKYJFfCeiB57q3r4Bcm.png"
               height="75"
             />
-            <div class="link">
-              <ul>
-                <li>Home</li>
-                <li>Home</li>
-                <li>Home</li>
-                <li>Home</li>
-              </ul>
+            <div class="row">
+              <div class="col">
+                <div class="link">
+                  <ul>
+                    <li>Home</li>
+                    <li>TvShow</li>
+                    <li>Movies</li>
+                    <li>Recently Added</li>
+                    <li>MyList</li>
+                  </ul>
+                </div>
+              </div>
             </div>
             <div class="SearchBox me-3">
-              <!-- <div class="icon">
-                <i class="fa-light fa-bell"></i>
-                <i class="fa-solid fa-bell"></i>
-              </div> -->
               <div class="input-group mt-3">
                 <input
                   type="text"
@@ -96,70 +97,79 @@ export default {
                   v-model="store.searchText"
                   @keyup.enter="performSearch()"
                 />
-
-                <button class="btn-info" type="button" @click="performSearch()">
-                  Search
+                <button class="btn btn-outline-dark" @click="performSearch()">
+                  search
                 </button>
               </div>
             </div>
           </div>
           <!--  CARD -->
-          <div class="card">
+          <div class="card boxcard">
             <div class="col bottom">
               <!-- film -->
-              <div v-if="rispApi.length > 0">
-                <ul>
-                  <li v-for="result in rispApi" :key="result.id">
-                    <h4 class="copertina">Titolo: {{ result.title }}</h4>
+              <div class="moviesList" v-if="rispApi.length > 0">
+               <h2>Film</h2>
+                <p>
+                  <p class="poster"  v-for="result in rispApi" :key="result.id">
                     <img
                       v-if="result.poster_path"
                       :src="`https://image.tmdb.org/t/p/w342${result.poster_path}`"
                     />
-                    <h6>Titolo Originale: {{ result.original_title }}</h6>
-                    <p class="bandiera">
-                      Lingua:
-                      <img
-                        :src="linguaBandiere[result.original_language]"
-                        height="20px"
-                      />
-                      {{ result.original_language }}
-                    </p>
-                    <div>
-                      <i
-                        v-for="(star, index) in 5"
-                        :key="index"
-                        class="fas fa-star"
-                        :class="
-                          stelle(index, result.vote_average) ? 'star' : ''
-                        "
-                      ></i>
+                    
+                    <div class="box-info">
+                      <h6 class="copertina">Titolo: {{ result.title }}</h6>
+                      <h6>Titolo Originale: {{ result.original_title }}</h6>
+                      <p class="bandiera">
+                        Lingua:
+                        <img
+                          class="liBandiere"
+                          :src="linguaBandiere[result.original_language]"
+                          height="20px"
+                        />
+                        {{ result.original_language }}
+                      </p>
+                      <div class="voti">
+                        <i
+                          v-for="(star, index) in 5"
+                          :key="index"
+                          class="fas fa-star"
+                          :class="
+                            stelle(index, result.vote_average) ? 'star' : ''
+                          "
+                        ></i>
+                      </div>
+                      <p class="avarage">Voto: {{ result.vote_average }}</p>
+                      <h6 class="overflow-hidden">{{ result.overview }}</h6>
                     </div>
-                    <p>Voto: {{ result.vote_average }}</p>
-                  </li>
-                </ul>
+                  </p>
+                </p>
               </div>
               <!-- serie Tv -->
-              <div v-if="rispApiTv.length > 0">
-                <ul>
-                  <li v-for="result in rispApiTv" :key="result.id">
-                    <h4>Titolo: {{ result.name }}</h4>
+              <div class="moviesList" v-if="rispApiTv.length > 0">
+                <h2>Serie Tv</h2>
+                <p>
+                  <p class="poster" v-for="result in rispApiTv" :key="result.id">
                     <img
+                      class="liBandiere"
                       v-if="result.poster_path"
                       :src="`https://image.tmdb.org/t/p/w185${result.poster_path}`"
                     />
-                    <h6>Titolo Originale: {{ result.original_name }}</h6>
-                    <p class="bandiera">
-                      Lingua:
-                      <img
-                        :src="linguaBandiere[result.original_language]"
-                        height="20px"
-                      />
-                      {{ result.original_language }}
-                    </p>
+                    <div class="box-info">
+                      <h4>Titolo: {{ result.name }}</h4>
+                      <h6>Titolo Originale: {{ result.original_name }}</h6>
+                      <p class="bandiera">
+                        Lingua:
+                        <img
+                          :src="linguaBandiere[result.original_language]"
+                          height="20px"
+                        />
+                        {{ result.original_language }}
+                      </p>
 
-                    <p>Voto: {{ result.vote_average }}</p>
-                  </li>
-                </ul>
+                      <p>Voto: {{ result.vote_average }}</p>
+                    </div>
+                  </p>
+                </p>
               </div>
             </div>
           </div>
@@ -167,23 +177,40 @@ export default {
       </div>
     </div>
   </div>
-  <!-- <i
-                          v-for="(star, index) in 5"
-                          :key="index"
-                          class="fas fa-star m-1 mt-3"
-                          :class="
-                            stelle(result, result.vote_average) ? 'giallo' : ''
-                          "
-                        ></i> -->
 </template>
 
 <style lang="scss">
-#logo-search {
-  font-size: larger;
+.sectionCard{
+  background-color: rgba(27, 27, 27, 0.897);
+  border-radius: 10px;
 }
-.icon {
-  background-color: antiquewhite !important;
-  color: white;
+.col{
+  background-color: rgba(27, 27, 27, 0.897);
+  border-radius: 10px;
+}
+.boxcard {
+  border-radius: 10px;
+  margin-left: 1rem;
+  border: none;
+
+  .poster > img {
+    border-radius: 10px;
+  }
+  // &:hover {
+  //   .dai > img {
+  //     display: none;
+  //   }
+  //   .box-info {
+  //     display:block !important;
+  //   }
+  // }
+}
+#logo-search {
+  font-size: medium;
+  p {
+    background-color: rgba(27, 27, 27, 0.897);
+    color: wheat;
+  }
 }
 .star {
   color: gold;
@@ -191,39 +218,34 @@ export default {
   height: 20px;
   background-color: yellow;
 }
-.bottom {
-  background-color: rgb(22, 22, 22);
-
-  color: yellow;
-}
-
 .top {
-  background-color: rgb(22, 22, 22);
   line-height: 30px;
-
   .bandiera > img {
     height: 30px;
     width: 30px;
     margin: 0;
     border-radius: 50%;
   }
-
   h1 {
     padding: 0 1px;
   }
 }
+.moviesList h2{
+  color: wheat;
+  background-color:  rgba(27, 27, 27, 0.425);
+}
 .link {
   ul {
     display: flex;
-    margin-left: 5rem;
   }
   li {
     list-style-type: none;
     padding: 1rem;
     color: white;
+    font-weight: bold;
   }
   li:hover {
-    background-color: rgba(255, 255, 255, 0.39);
+    color: rgba(255, 255, 255, 0.39);
   }
 }
 </style>
