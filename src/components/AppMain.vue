@@ -6,17 +6,7 @@ export default {
   data() {
     return {};
   },
-  methods: {
-    // getcountryFlags(lang) {
-    //   return require(`./assets/img/${lang}.png`);
-    // },
-    // stelle(index, voto) {
-    //   const media = Math.ceil(voto / 2);
-    //   if (media > index) {
-    //     return true;
-    //   }
-    // },
-  },
+  methods: {},
 };
 </script>
 

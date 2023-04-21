@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "Movies",
+  name: "Card",
 
   data() {
     return {};

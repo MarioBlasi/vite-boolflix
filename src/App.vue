@@ -1,14 +1,14 @@
 <script>
 import AppHeader from "./components/AppHeader.vue";
 import AppMain from "./components/AppMain.vue";
-import Movies from "./components/Movies.vue";
+import Card from "./components/Card.vue";
 
 export default {
   name: "Appvue",
   components: {
     AppHeader,
     AppMain,
-    Movies,
+    Card,
   },
   data() {
     return {

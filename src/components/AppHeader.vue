@@ -68,14 +68,26 @@ export default {
     <div class="flex-container" id="logo-search">
       <div class="row list">
         <!-- HEADER -->
-        <div class="col top">
+        <div class="col top p-1">
           <div class="logoBox d-flex justify-content-between">
             <img
-              class="logo p-2"
+              class="logo p-2 ms-3"
               src="https://image.tmdb.org/t/p/w500/wwemzKWzjKYJFfCeiB57q3r4Bcm.png"
               height="75"
             />
-            <div class="SearchBox">
+            <div class="link">
+              <ul>
+                <li>Home</li>
+                <li>Home</li>
+                <li>Home</li>
+                <li>Home</li>
+              </ul>
+            </div>
+            <div class="SearchBox me-3">
+              <!-- <div class="icon">
+                <i class="fa-light fa-bell"></i>
+                <i class="fa-solid fa-bell"></i>
+              </div> -->
               <div class="input-group mt-3">
                 <input
                   type="text"
@@ -101,7 +113,7 @@ export default {
                     <h4 class="copertina">Titolo: {{ result.title }}</h4>
                     <img
                       v-if="result.poster_path"
-                      :src="`https://image.tmdb.org/t/p/w200${result.poster_path}`"
+                      :src="`https://image.tmdb.org/t/p/w342${result.poster_path}`"
                     />
                     <h6>Titolo Originale: {{ result.original_title }}</h6>
                     <p class="bandiera">
@@ -114,9 +126,9 @@ export default {
                     </p>
                     <div>
                       <i
-                        v-for="index in 5"
+                        v-for="(star, index) in 5"
                         :key="index"
-                        class="fa-solid fa-star"
+                        class="fas fa-star"
                         :class="
                           stelle(index, result.vote_average) ? 'star' : ''
                         "
@@ -144,6 +156,7 @@ export default {
                       />
                       {{ result.original_language }}
                     </p>
+
                     <p>Voto: {{ result.vote_average }}</p>
                   </li>
                 </ul>
@@ -166,7 +179,11 @@ export default {
 
 <style lang="scss">
 #logo-search {
-  border: 2px solid red;
+  font-size: larger;
+}
+.icon {
+  background-color: antiquewhite !important;
+  color: white;
 }
 .star {
   color: gold;
@@ -175,15 +192,14 @@ export default {
   background-color: yellow;
 }
 .bottom {
-  background-color: #272b30;
-  border: 2px solid rgb(0, 4, 247);
+  background-color: rgb(22, 22, 22);
+
   color: yellow;
 }
 
 .top {
-  background-color: #272b30;
+  background-color: rgb(22, 22, 22);
   line-height: 30px;
-  border-bottom: 1px solid rgba(28, 28, 28, 0.6);
 
   .bandiera > img {
     height: 30px;
@@ -194,6 +210,20 @@ export default {
 
   h1 {
     padding: 0 1px;
+  }
+}
+.link {
+  ul {
+    display: flex;
+    margin-left: 5rem;
+  }
+  li {
+    list-style-type: none;
+    padding: 1rem;
+    color: white;
+  }
+  li:hover {
+    background-color: rgba(255, 255, 255, 0.39);
   }
 }
 </style>
