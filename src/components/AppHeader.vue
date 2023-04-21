@@ -14,17 +14,29 @@ export default {
       store,
       linguaBandiere: {
         en: "./img/en.png",
+        uk: "./img/en.png",
         es: "./img/en.png",
         fr: "./img/fr.png",
         it: "./img/it.png",
         de: "./img/de.png",
+        ja: "./img/ja.png",
+        hi: "./img/hi.png",
+        ru: "./img/ru.png",
+        zh: "./img/zh.png",
+        ar: "./img/ar.png",
       },
     };
   },
-
   methods: {
+    stelle(index, voto) {
+      const media = Math.ceil(voto / 2);
+      if (media > index) {
+        return true;
+      }
+      console.log(this.stelle);
+    },
+
     performSearch() {
-      console.log("performSearch");
       // film
       axios
         .get(
@@ -48,57 +60,83 @@ export default {
         });
     },
   },
-  //   stelle(result, voto) {
-  //     const media = Math.ceil(voto / 2);
-  //     if (media > result) {
-  //       return true;
-  //     }
-  //     return false;
-  //   },
 };
 </script>
 
 <template>
   <div>
     <div class="flex-container" id="logo-search">
-      <div class="row list mt-2">
+      <div class="row list">
         <!-- HEADER -->
         <div class="col top">
-          <img
-            src="https://image.tmdb.org/t/p/w500/wwemzKWzjKYJFfCeiB57q3r4Bcm.png"
-          />
-          <div class="SearchBox">
-            <div class="input-group d-flex justify-content-end mb-3">
-              <input
-                type="text"
-                class="form"
-                placeholder=" search something"
-                v-model="store.searchText"
-                @keyup.enter="performSearch()"
-              />
+          <div class="logoBox d-flex justify-content-between">
+            <img
+              class="logo p-2"
+              src="https://image.tmdb.org/t/p/w500/wwemzKWzjKYJFfCeiB57q3r4Bcm.png"
+              height="75"
+            />
+            <div class="SearchBox">
+              <div class="input-group mt-3">
+                <input
+                  type="text"
+                  class="form"
+                  placeholder=" search something"
+                  v-model="store.searchText"
+                  @keyup.enter="performSearch()"
+                />
 
-              <button
-                class="btn btn-info"
-                type="button"
-                @click="performSearch()"
-              >
-                Search
-              </button>
+                <button class="btn-info" type="button" @click="performSearch()">
+                  Search
+                </button>
+              </div>
             </div>
           </div>
           <!--  CARD -->
           <div class="card">
             <div class="col bottom">
+              <!-- film -->
               <div v-if="rispApi.length > 0">
                 <ul>
                   <li v-for="result in rispApi" :key="result.id">
-                    <h4>Titolo: {{ result.title }}</h4>
+                    <h4 class="copertina">Titolo: {{ result.title }}</h4>
                     <img
                       v-if="result.poster_path"
-                      :src="`https://image.tmdb.org/t/p/w300${result.poster_path}`"
+                      :src="`https://image.tmdb.org/t/p/w200${result.poster_path}`"
                     />
                     <h6>Titolo Originale: {{ result.original_title }}</h6>
-                    <p>
+                    <p class="bandiera">
+                      Lingua:
+                      <img
+                        :src="linguaBandiere[result.original_language]"
+                        height="20px"
+                      />
+                      {{ result.original_language }}
+                    </p>
+                    <div>
+                      <i
+                        v-for="index in 5"
+                        :key="index"
+                        class="fa-solid fa-star"
+                        :class="
+                          stelle(index, result.vote_average) ? 'star' : ''
+                        "
+                      ></i>
+                    </div>
+                    <p>Voto: {{ result.vote_average }}</p>
+                  </li>
+                </ul>
+              </div>
+              <!-- serie Tv -->
+              <div v-if="rispApiTv.length > 0">
+                <ul>
+                  <li v-for="result in rispApiTv" :key="result.id">
+                    <h4>Titolo: {{ result.name }}</h4>
+                    <img
+                      v-if="result.poster_path"
+                      :src="`https://image.tmdb.org/t/p/w185${result.poster_path}`"
+                    />
+                    <h6>Titolo Originale: {{ result.original_name }}</h6>
+                    <p class="bandiera">
                       Lingua:
                       <img
                         :src="linguaBandiere[result.original_language]"
@@ -107,14 +145,6 @@ export default {
                       {{ result.original_language }}
                     </p>
                     <p>Voto: {{ result.vote_average }}</p>
-                    <!-- <i
-                          v-for="(star, index) in 5"
-                          :key="index"
-                          class="fas fa-star m-1 mt-3"
-                          :class="
-                            stelle(result, result.vote_average) ? 'giallo' : ''
-                          "
-                        ></i> -->
                   </li>
                 </ul>
               </div>
@@ -124,21 +154,46 @@ export default {
       </div>
     </div>
   </div>
+  <!-- <i
+                          v-for="(star, index) in 5"
+                          :key="index"
+                          class="fas fa-star m-1 mt-3"
+                          :class="
+                            stelle(result, result.vote_average) ? 'giallo' : ''
+                          "
+                        ></i> -->
 </template>
 
 <style lang="scss">
 #logo-search {
-  border: 5px solid red;
+  border: 2px solid red;
 }
-.card {
-  border: 10px solid rgb(0, 22, 223);
-  .bottom {
-    background-color: rgb(16, 31, 26);
-    border: 5px solid rgb(0, 4, 247);
-    color: yellow;
-  }
+.star {
+  color: gold;
+  width: 20px;
+  height: 20px;
+  background-color: yellow;
 }
+.bottom {
+  background-color: #272b30;
+  border: 2px solid rgb(0, 4, 247);
+  color: yellow;
+}
+
 .top {
-  border: 5px solid rgb(0, 223, 67);
+  background-color: #272b30;
+  line-height: 30px;
+  border-bottom: 1px solid rgba(28, 28, 28, 0.6);
+
+  .bandiera > img {
+    height: 30px;
+    width: 30px;
+    margin: 0;
+    border-radius: 50%;
+  }
+
+  h1 {
+    padding: 0 1px;
+  }
 }
 </style>

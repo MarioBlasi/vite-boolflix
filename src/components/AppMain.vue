@@ -23,15 +23,7 @@ export default {
 <template></template>
 <!-- CARD -->
 
-<style lang="scss">
-main {
-  color: orange;
-  background-color: rgb(158, 10, 10);
-  .card {
-    background-color: blue;
-  }
-}
-</style>
+<style lang="scss"></style>
 <!-- 
 https://api.themoviedb.org/3/search/tv?api_key=e99307154c6dfb0b4750f6603256716d&language=it_IT&query=scrubs
   -->
