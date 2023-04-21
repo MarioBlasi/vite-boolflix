@@ -5,26 +5,10 @@ export default {
   name: "AppHeader",
   data() {
     return {
-      rispApi: [],
-      rispApiTv: [],
-      baseUri: "https://api.themoviedb.org/3/",
-      typeSearch: "search/movie",
-      typeSearchTv: "search/tv",
-      apiKey: "?api_key=f4a2ba11f237cc06a01698ccbd4cb0f5",
+     
+      
       store,
-      linguaBandiere: {
-        en: "./img/en.png",
-        uk: "./img/en.png",
-        es: "./img/en.png",
-        fr: "./img/fr.png",
-        it: "./img/it.png",
-        de: "./img/de.png",
-        ja: "./img/ja.png",
-        hi: "./img/hi.png",
-        ru: "./img/ru.png",
-        zh: "./img/zh.png",
-        ar: "./img/ar.png",
-      },
+     
     };
   },
   methods: {
@@ -115,8 +99,7 @@ export default {
                       v-if="result.poster_path"
                       :src="`https://image.tmdb.org/t/p/w342${result.poster_path}`"
                     />
-                    
-                    <div class="box-info">
+                    <div class="d-none box-info">
                       <h6 class="copertina">Titolo: {{ result.title }}</h6>
                       <h6>Titolo Originale: {{ result.original_title }}</h6>
                       <p class="bandiera">
@@ -134,7 +117,7 @@ export default {
                           :key="index"
                           class="fas fa-star"
                           :class="
-                            stelle(index, result.vote_average) ? 'star' : ''
+                            stelle(index, result.vote_average) ? 'stars' : ''
                           "
                         ></i>
                       </div>
@@ -152,9 +135,9 @@ export default {
                     <img
                       class="liBandiere"
                       v-if="result.poster_path"
-                      :src="`https://image.tmdb.org/t/p/w185${result.poster_path}`"
+                      :src="`https://image.tmdb.org/t/p/w342${result.poster_path}`"
                     />
-                    <div class="box-info">
+                    <div class="d-none box-info">
                       <h4>Titolo: {{ result.name }}</h4>
                       <h6>Titolo Originale: {{ result.original_name }}</h6>
                       <p class="bandiera">
@@ -165,7 +148,6 @@ export default {
                         />
                         {{ result.original_language }}
                       </p>
-
                       <p>Voto: {{ result.vote_average }}</p>
                     </div>
                   </p>
@@ -196,14 +178,14 @@ export default {
   .poster > img {
     border-radius: 10px;
   }
-  // &:hover {
-  //   .dai > img {
-  //     display: none;
-  //   }
-  //   .box-info {
-  //     display:block !important;
-  //   }
-  // }
+  &:hover {
+    .dai > img {
+      display: none;
+    }
+    .box-info {
+      display:block !important;
+    }
+  }
 }
 #logo-search {
   font-size: medium;
@@ -212,11 +194,8 @@ export default {
     color: wheat;
   }
 }
-.star {
+.stars {
   color: gold;
-  width: 20px;
-  height: 20px;
-  background-color: yellow;
 }
 .top {
   line-height: 30px;
