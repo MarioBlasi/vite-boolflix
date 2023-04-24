@@ -1,4 +1,10 @@
 <script>
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+
+library.add(fas);
+
 import { store } from "../store";
 export default {
   name: "AppMain",
@@ -8,18 +14,23 @@ export default {
     return {
       store,
       linguaBandiere: {
-        en: "./img/en.png",
-        uk: "./img/en.png",
-        es: "./img/en.png",
-        fr: "./img/fr.png",
-        it: "./img/it.png",
-        de: "./img/de.png",
-        ja: "./img/ja.png",
-        hi: "./img/hi.png",
-        ru: "./img/ru.png",
-        zh: "./img/zh.png",
-        ar: "./img/ar.png",
+        en: "./src/assets/img/en.png",
+        uk: "./src/assets/img/en.png",
+        es: "./src/assets/img/es.png",
+        fr: "./src/assets/img/fr.png",
+        it: "./src/assets/img/it.png",
+        de: "./src/assets/img/de.png",
+        ja: "./src/assets/img/ja.png",
+        hi: "./src/assets/img/hi.png",
+        ru: "./src/assets/img/ru.png",
+        zh: "./src/assets/img/zh.png",
+        ar: "./src/assets/img/ar.png",
+        nl: "./src/assets/img/nl.png",
+        ko: "./src/assets/img/ko.png",
+        tr: "./src/assets/img/tr.png",
+        pt: "./src/assets/img/pt.png",
       },
+      showInfo: false,
     };
   },
   methods: {
@@ -35,6 +46,9 @@ export default {
 </script>
 
 <template>
+  <div>
+    <font-awesome-icon icon="star" />
+  </div>
   <div class="container container_main">
     <div class="row card boxcard">
       <h2>Film</h2>
@@ -51,24 +65,21 @@ export default {
           <div class="d-none box-info card-back">
             <h6>Titolo: {{ result.title }}</h6>
             <h6>Titolo Originale: {{ result.original_title }}</h6>
-            <h6>
+            <h6 class="bandiere">
               Lingua:
-              <img
-                :src="linguaBandiere[result.original_language]"
-                height="50px"
-              />
+              <img :src="linguaBandiere[result.original_language]" />
               {{ result.original_language }}
             </h6>
             <div>
               <i
                 v-for="(star, index) in 5"
                 :key="index"
-                class="fas fa-star"
+                class="fa-solid fa-star"
                 :class="stelle(index, result.vote_average) ? 'stars' : ''"
               ></i>
             </div>
             <h6>Voto: {{ result.vote_average }}</h6>
-            <!-- <h6 class="overflow-hidden">{{ result.overview }}</h6> -->
+            <p class="overflow-hidden">{{ result.overview }}</p>
           </div>
         </h6>
       </div>
@@ -89,7 +100,7 @@ export default {
           <div class="d-none box-info card-back">
             <h6>Titolo: {{ result.name }}</h6>
             <h6>Titolo Originale: {{ result.original_name }}</h6>
-            <h6>
+            <h6 class="bandiere">
               Lingua:
               <img
                 :src="linguaBandiere[result.original_language]"
@@ -105,7 +116,10 @@ export default {
                 :class="stelle(index, result.vote_average) ? 'stars' : ''"
               ></i>
             </div>
-            <h6>Voto: {{ result.vote_average }}</h6>
+            <div class="valutazione text-center">
+              <h6>Voto: {{ result.vote_average }}</h6>
+              <p class="overflow-hidden">{{ result.overview }}</p>
+            </div>
           </div>
         </h6>
       </div>
@@ -124,7 +138,9 @@ export default {
   background-color: rgba(27, 27, 27, 0.897);
 }
 .box-info {
-  display: block;
+  border: 2px solid rgba(128, 128, 128, 0.062);
+  max-width: 21rem;
+  margin-left: 0.5rem;
 }
 .boxcard:hover .immagine > img {
   display: none;
@@ -133,23 +149,19 @@ export default {
 .boxcard:hover .box-info {
   display: block !important;
 }
-// .boxcard {
-//   color: white;
+.bandiere > img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
 
-//   .poster > img {
-//     border-radius: 10px;
-//   }
-//   &:hover {
-//     .immagine > img {
-//       display: none;
-//     }
-//     .box-info {
-//       display: block !important;
-//     }
-//   }
-// }
 .stars {
-  color: gold;
+  border: 2px solid rgb(255, 238, 0);
+  border-radius: 50%;
+  margin: 2px;
+}
+.overflow-hidden {
+  max-width: 20rem;
 }
 .top {
   line-height: 30px;
@@ -165,9 +177,6 @@ h2 {
   color: wheat;
   background-color: rgba(27, 27, 27, 0.897);
   border-radius: 10px;
-  border: 1px solid grey;
+  border: 2px solid rgba(128, 128, 128, 0.062);
 }
 </style>
-<!-- 
-https://api.themoviedb.org/3/search/tv?api_key=e99307154c6dfb0b4750f6603256716d&language=it_IT&query=scrubs
-  -->

@@ -98,7 +98,7 @@ export default {
     font-weight: bold;
   }
   li:hover {
-    color: rgba(255, 255, 255, 0.39);
+    color: rgba(255, 255, 255, 0.096);
   }
 }
 </style>

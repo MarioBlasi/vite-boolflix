@@ -17,30 +17,16 @@ export default {
     };
   },
 
-  methods: {
-    // getApi(headerApi) {
-    //   this.appApi = headerApi;
-    // },
-    // getApi(headerApiTv) {
-    //   this.appApiTv = headerApiTv;
-    // },
-  },
+  methods: {},
 };
 </script>
 
 <template>
-  <!-- <div id="app">
-    <AppHeader @headerApi="getApi" @headerApiTv="getApiTv" />
-    <AppMain :results="appApi" :tv-results="appApiTv" />
-  </div> -->
   <AppHeader></AppHeader>
-  <!-- @headerApi="getApi" -->
 
   <AppMain></AppMain>
-  <!-- :apiData="appApi" -->
 
-  <!--<AppCard></AppCard> -->
+  <AppCard></AppCard>
 </template>
-//
-https://api.themoviedb.org/3/search/movie?api_key=f4a2ba11f237cc06a01698ccbd4cb0f5&query=avatar
+
 <style lang="scss"></style>
