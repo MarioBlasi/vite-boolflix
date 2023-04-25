@@ -46,9 +46,6 @@ export default {
 </script>
 
 <template>
-  <div>
-    <font-awesome-icon icon="star" />
-  </div>
   <div class="container container_main">
     <div class="row card boxcard">
       <h2>Film</h2>
@@ -78,6 +75,7 @@ export default {
                 :class="stelle(index, result.vote_average) ? 'stars' : ''"
               ></i>
             </div>
+            <p></p>
             <h6>Voto: {{ result.vote_average }}</h6>
             <p class="overflow-hidden">{{ result.overview }}</p>
           </div>
@@ -97,7 +95,7 @@ export default {
             v-if="result.poster_path"
             :src="`https://image.tmdb.org/t/p/w342${result.poster_path}`"
           />
-          <div class="d-none box-info card-back">
+          <div class="d-none box-info card-back overflow-hidden">
             <h6>Titolo: {{ result.name }}</h6>
             <h6>Titolo Originale: {{ result.original_name }}</h6>
             <h6 class="bandiere">
@@ -115,6 +113,7 @@ export default {
                 class="fas fa-star"
                 :class="stelle(index, result.vote_average) ? 'stars' : ''"
               ></i>
+              <p></p>
             </div>
             <div class="valutazione text-center">
               <h6>Voto: {{ result.vote_average }}</h6>
@@ -128,6 +127,36 @@ export default {
 </template>
 
 <style lang="scss">
+::-webkit-scrollbar {
+  width: 0.8rem;
+  height: 0.8rem;
+  background: rgba(128, 128, 128, 0.007);
+  margin-right: 10px;
+}
+::-webkit-scrollbar:hover {
+  background-color: rgba(7, 75, 153, 0.425);
+  border: none;
+}
+::-webkit-resizer {
+  -webkit-border-radius: 4px;
+  background-color: rgba(128, 128, 128, 0.062);
+  border: none;
+}
+::-webkit-scrollbar-thumb {
+  min-height: 0.8rem;
+  min-width: 0.8rem;
+  -webkit-border-radius: 50%;
+  background-color: rgb(220, 26, 40);
+  border: none;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(220, 26, 40);
+  border: none;
+}
+::-webkit-scrollbar-thumb:active {
+  background-color: rgb(220, 26, 40);
+  border: none;
+}
 .container_main {
   margin: 0 auto;
   background-color: rgba(27, 27, 27, 0.897);
@@ -154,12 +183,58 @@ export default {
   height: 30px;
   border-radius: 50%;
 }
-
-.stars {
-  border: 2px solid rgb(255, 238, 0);
-  border-radius: 50%;
-  margin: 2px;
+@mixin stars($larghezza, $sfondo, $rotazione) {
+  position: relative;
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-right: round($larghezza/2) solid transparent;
+  border-bottom: round($larghezza/2.83) solid $sfondo;
+  border-left: round($larghezza/2) solid transparent;
+  -moz-transform: rotate(180deg + $rotazione);
+  -webkit-transform: rotate(180deg + $rotazione);
+  -ms-transform: rotate(180deg + $rotazione);
+  -o-transform: rotate(180deg + $rotazione);
+  transform: rotate(180deg + $rotazione);
+  &:after {
+    content: "";
+    width: 0;
+    height: 0;
+    display: block;
+    position: absolute;
+    top: round($larghezza/-5.57);
+    left: round($larghezza/-3.68);
+    border-bottom: round($larghezza/2.83) solid $sfondo;
+    border-left: round($larghezza/8.762) solid transparent;
+    border-right: round($larghezza/2) solid transparent;
+    -moz-transform: rotate(-72deg);
+    -webkit-transform: rotate(-72deg);
+    -ms-transform: rotate(-72deg);
+    -o-transform: rotate(-72deg);
+    transform: rotate(-72deg);
+  }
+  &:before {
+    content: "";
+    width: 0;
+    height: 0;
+    display: block;
+    position: absolute;
+    top: 0;
+    right: round($larghezza/-2);
+    border-bottom: round($larghezza/2.83) solid $sfondo;
+    border-left: round($larghezza/2) solid transparent;
+    border-right: round($larghezza/2) solid transparent;
+    -moz-transform: rotate(72deg);
+    -webkit-transform: rotate(72deg);
+    -ms-transform: rotate(72deg);
+    -o-transform: rotate(72deg);
+    transform: rotate(72deg);
+  }
 }
+.stars {
+  @include stars(20px, gold, 0);
+}
+
 .overflow-hidden {
   max-width: 20rem;
 }
